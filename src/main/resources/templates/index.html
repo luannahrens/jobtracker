@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Job Application Tracker</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<h1>Job Application Tracker</h1>
+
+<a th:href="@{/applications/new}">Add New Application</a>
+
+<form th:action="@{/applications}" method="get" style="margin-top: 20px;">
+    <label for="status">Filter by status:</label>
+    <select id="status" name="status">
+        <option value="">All</option>
+        <option value="Applied" th:selected="${selectedStatus == 'Applied'}">Applied</option>
+        <option value="Interviewing" th:selected="${selectedStatus == 'Interviewing'}">Interviewing</option>
+        <option value="Rejected" th:selected="${selectedStatus == 'Rejected'}">Rejected</option>
+        <option value="Offer" th:selected="${selectedStatus == 'Offer'}">Offer</option>
+    </select>
+    <button type="submit">Filter</button>
+</form>
+
+<table border="1" cellpadding="8" cellspacing="0" style="margin-top: 20px;">
+    <thead>
+    <tr>
+        <th>Company</th>
+        <th>Job Title</th>
+        <th>Status</th>
+        <th>Date Applied</th>
+        <th>Notes</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="app : ${applications}">
+        <td th:text="${app.companyName}"></td>
+        <td th:text="${app.jobTitle}"></td>
+        <td th:text="${app.status}"></td>
+        <td th:text="${app.dateApplied}"></td>
+        <td th:text="${app.notes}"></td>
+        <td>
+            <a th:href="@{/applications/{id}/edit(id=${app.id})}">Edit</a>
+            <form th:action="@{/applications/{id}/delete(id=${app.id})}" method="post" style="display:inline;">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

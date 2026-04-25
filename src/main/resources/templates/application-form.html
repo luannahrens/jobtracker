@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Application Form</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<h1 th:text="${jobApplication.id == null} ? 'Add Application' : 'Edit Application'"></h1>
+
+<form th:action="${formAction}" th:object="${jobApplication}" method="post">
+    <div>
+        <label>Company Name:</label>
+        <input type="text" th:field="*{companyName}">
+        <span th:if="${#fields.hasErrors('companyName')}" th:errors="*{companyName}"></span>
+    </div>
+
+    <div>
+        <label>Job Title:</label>
+        <input type="text" th:field="*{jobTitle}">
+        <span th:if="${#fields.hasErrors('jobTitle')}" th:errors="*{jobTitle}"></span>
+    </div>
+
+    <div>
+        <label>Status:</label>
+        <select th:field="*{status}">
+            <option value="">Select</option>
+            <option value="Applied">Applied</option>
+            <option value="Interviewing">Interviewing</option>
+            <option value="Rejected">Rejected</option>
+            <option value="Offer">Offer</option>
+        </select>
+        <span th:if="${#fields.hasErrors('status')}" th:errors="*{status}"></span>
+    </div>
+
+    <div>
+        <label>Date Applied:</label>
+        <input type="date" th:field="*{dateApplied}">
+        <span th:if="${#fields.hasErrors('dateApplied')}" th:errors="*{dateApplied}"></span>
+    </div>
+
+    <div>
+        <label>Notes:</label>
+        <textarea th:field="*{notes}"></textarea>
+    </div>
+
+    <div style="margin-top: 10px;">
+        <button type="submit">Save</button>
+        <a th:href="@{/applications}">Cancel</a>
+    </div>
+</form>
+</body>
+</html>
