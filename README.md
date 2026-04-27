@@ -69,6 +69,7 @@ src/
 │   ├── java/com/example/jobtracker/
 │   │   ├── JobtrackerApplication.java          # Main application class
 │   │   ├── controller/JobApplicationController.java  # Web controller
+│   │   ├── controller/JobApplicationRestController.java  # REST controller
 │   │   ├── model/JobApplication.java           # Data model
 │   │   ├── repository/JobApplicationRepository.java  # Data access
 │   │   └── service/JobApplicationService.java # Business logic
